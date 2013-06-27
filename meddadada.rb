@@ -11,12 +11,17 @@ get '/home' do
 end
 
 get '/about' do
-    markdown File.read("README.md")
+  markdown File.read("README.md")
+end
+
+get '/submission' do
+  File.read("submission.txt")
 end
 
 post '/submit' do
   # just dump all the post data to a file...we'll parse it for the good stuff
-  File.open("submission.txt", "a"){ |f| f.write(params.inspect) }
+  File.open("submission.txt", "a"){ |f| f.write(request.inspect) }
+  redirect '/home'
 end
 
 __END__
